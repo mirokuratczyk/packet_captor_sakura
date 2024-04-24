@@ -64,12 +64,23 @@ impl Dataset {
         // Sort reports by type and name
         work.par_sort_unstable_by_key(|report| (report.work_type, report.work.index));
         // Extract data from each work item
-        let classes = work
+        let maybe_all_flow_data = work
             .into_par_iter()
             // Filter out failed work
             .filter(|report| report.success)
             // Load flow data from the PCAP for this work
-            .flat_map(|report| FlowData::load(report, data_dir))
+            .map(|report| FlowData::load(report, data_dir))
+            .collect::<Result<Vec<_>, Error>>();
+
+        // TODO: there probably exists a cleaner way to do this
+        let all_flow_data = match maybe_all_flow_data {
+            Ok(flow) => flow,
+            Err(error) => return Err(error),
+        };
+
+        let classes =
+            all_flow_data
+            .into_iter()
             // Separate out group type so we can aggregate
             .map(|flow_data| (flow_data.class, flow_data))
             // Collect into one big vector
@@ -78,6 +89,7 @@ impl Dataset {
             .into_iter()
             // Group by type
             .into_group_map();
+
         Ok(Dataset { classes })
     }
 
