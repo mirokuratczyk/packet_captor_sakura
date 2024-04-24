@@ -27,13 +27,11 @@ make logs
 ```
 ## TEMP - notes
 ```
-# where report.json is stored 
+# where report.json and pcaps are stored
+# NOTE: both report.json and pcaps need to be stored in the same dir to work
+# with data_generator. 
 sudo mkdir -p /tmp/data/pcap_data/test
 sudo chmod -R 777 /tmp/data/pcap_data/test
-
-# where pcaps are stored
-sudo mkdir -p /tmp/toaru/railgun/research/pcaps/test
-sudo chmod -R 777 /tmp/toaru/railgun/research/pcaps/test
 
 # start collection
 make up
