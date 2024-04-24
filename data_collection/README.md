@@ -25,3 +25,14 @@ make scale
 ```bash
 make logs
 ```
+## TEMP - notes
+```
+make
+sudo mkdir -p /tmp/data/pcap_data/test
+sudo chmod -R 777 /tmp/data/pcap_data/test
+sudo mkdir -p /tmp/toaru/railgun/research/pcaps/test
+sudo chmod -R 777 /tmp/toaru/railgun/research/pcaps/test
+make up
+
+make logs
+```

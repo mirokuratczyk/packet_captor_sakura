@@ -21,7 +21,7 @@ services:
         environment:
             - CONFIG_FILENAME=config.toml
         volumes:
-            - /mnt/toaru/railgun/research/pcaps/test:/pcap_data
+            - /tmp/toaru/railgun/research/pcaps/test:/pcap_data
             - /dev/shm:/dev/shm
         depends_on: 
             - "url_queue"
@@ -30,6 +30,6 @@ services:
         restart: on-failure
     url_queue:
         volumes:
-            - /mnt/data/pcap_data/test:/pcap_data
+            - /tmp/data/pcap_data/test:/pcap_data
         build:
             context: url_queue

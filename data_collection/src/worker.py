@@ -62,7 +62,7 @@ class Worker():
         waiting = True
         while waiting:
             try:
-                self.logger.info("Attempting to contact work queue")
+                self.logger.info("Attempting to contact work queue {}".format(self.work_url))
                 self.session.get("{}/status".format(self.work_url))
                 waiting = False
             except Exception as _:
