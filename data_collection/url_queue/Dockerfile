@@ -41,9 +41,9 @@ WORKDIR $USER_HOME
 
 # Download the alexa top 1m
 ENV ALEXA_PATH="${USER_HOME}/alexa-1m.csv"
-RUN wget --no-verbose "https://s3.amazonaws.com/alexa-static/top-1m.csv.zip" && \
-	unzip top-1m.csv.zip && \ 
-	rm top-1m.csv.zip && \
+RUN wget --no-verbose "https://github.com/mozilla/cipherscan/blob/master/top1m/top-1m.csv" && \
+	# unzip top-1m.csv.zip && \ 
+	# rm top-1m.csv.zip && \
 	mkdir data && \
 	mv top-1m.csv "${ALEXA_PATH}"
 

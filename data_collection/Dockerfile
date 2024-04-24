@@ -102,7 +102,7 @@ WORKDIR $USER_HOME
 # You may have to fiddle with the URLs a bit
 ENV TOR_DIST_MIRROR="https://www.torproject.org" \
     TBB_PATH="${USER_HOME}/tor_browser" \
-	TBB_VERSION="9.0.4" \
+	TBB_VERSION="13.0.14" \
 	GPG_KEYSERVER="sks-keyservers.net" \
 	TBB_KEYID="EF6E 286D DA85 EA2A 4BA7  DE68 4E2C 6E87 9329 8290"
 
@@ -112,12 +112,12 @@ ENV TOR_DIST_MIRROR="https://www.torproject.org" \
 # Verify it with GPG
 # Unzip it
 # Delete the zip and gpg files
-RUN wget --no-verbose "${TOR_DIST_MIRROR}/dist/torbrowser/${TBB_VERSION}/tor-browser-linux64-${TBB_VERSION}_en-US.tar.xz" -O tor_browser.tar.xz && \
+RUN wget --no-verbose "${TOR_DIST_MIRROR}/dist/torbrowser/${TBB_VERSION}/tor-browser-linux-x86_64-${TBB_VERSION}.tar.xz" -O tor_browser.tar.xz && \
     # wget --no-verbose "${TOR_DIST_MIRROR}/dist/torbrowser/${TBB_VERSION}/tor-browser-linux64-${TBB_VERSION}_en-US.tar.xz.asc" -O tor_browser.tar.xz.asc && \
     # gpg --keyserver "${GPG_KEYSERVER}" --recv-keys "${TBB_KEYID}" && \
     # gpg --verify tor_browser.tar.xz.asc && \
     tar xf tor_browser.tar.xz && \
-    mv tor-browser_en-US $TBB_PATH
+    mv tor-browser $TBB_PATH
     # rm tor_browser.tar.xz tor_browser.tar.xz.asc
 
 # Copy tcpdump driver
