@@ -20,6 +20,9 @@ FROM rust:1.32
 LABEL version="0.1"
 LABEL Description="API for retrieving new URLs to navigate to"
 
+# https://unix.stackexchange.com/a/743865
+RUN echo "deb http://archive.debian.org/debian stretch main" > /etc/apt/sources.list
+
 # Install some extra packages
 RUN apt-get update -y && \
 	apt-get install -y sudo unzip
