@@ -65,9 +65,9 @@ class Worker():
                 self.logger.info("Attempting to contact work queue {}".format(self.work_url))
                 self.session.get("{}/status".format(self.work_url))
                 waiting = False
-            except Exception as _:
+            except Exception as exc:
                 self.logger.info(
-                    "Attempt to contact work queue failed. Retrying")
+                    "Attempt to contact work queue failed with \"{}\". Retrying".format(exc))
         # Request a client ID
         # TODO: look into renaming this "register"
         self.logger.info("Registering client with server")

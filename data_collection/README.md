@@ -28,8 +28,12 @@ make logs
 ## TEMP - notes
 ```
 make
+
+# where report.json is stored 
 sudo mkdir -p /tmp/data/pcap_data/test
 sudo chmod -R 777 /tmp/data/pcap_data/test
+
+# where pcaps are stored
 sudo mkdir -p /tmp/toaru/railgun/research/pcaps/test
 sudo chmod -R 777 /tmp/toaru/railgun/research/pcaps/test
 make up

@@ -26,6 +26,11 @@ services:
         depends_on: 
             - "url_queue"
         links:
+            # https://docs.docker.com/compose/compose-file/compose-file-v3/#networks
+            # > Containers for the linked service are reachable at a hostname identical to the alias, or the service name if no alias was specified.
+            # > Links are not required to enable services to communicate - by default, any service can reach any other service at that service’s name. (See also, the Link containers section in Networking in Compose.)
+            #
+            # https://docs.docker.com/compose/networking/#link-containers
             - "url_queue:url_queue"
         restart: on-failure
     url_queue:
