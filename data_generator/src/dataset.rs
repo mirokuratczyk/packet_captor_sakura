@@ -35,6 +35,20 @@ use tempdir::TempDir;
 use url_queue::capture::{CaptureWork, CaptureWorkType};
 use url_queue::work::WorkReportRequest;
 
+#[derive(Debug)]
+struct WrappedError {
+    description: String,
+    err: std::io::Error
+}
+
+impl std::fmt::Display for WrappedError {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        write!(f, "{} {}", self.description, self.err)
+    }
+}
+
+impl std::error::Error for WrappedError {}
+
 pub struct Dataset {
     classes: HashMap<CaptureWorkType, Vec<FlowData>>,
 }
@@ -224,7 +238,9 @@ impl FlowData {
                     .ok_or_else(|| format_err!("Path string could not be parsed"))?,
             )
             .arg("base/protocols/conn")
-            .status()?;
+            .status()
+            .map_err(|err|WrappedError{err:err, description: "failed to launch zeek (check if it is installed)".into()})?;
+
         info!("Finished running bro on {:?}", pcap_path);
         // Check error code
         ensure!(bro_return.success(), "Bro exited with failure code");
